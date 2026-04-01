@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head><style>body { font-family: sans-serif; padding: 20px; }</style></head>
+<body>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Victor Hugo | Consultor Direcional Premium</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #003399; /* Azul Direcional */
+            --accent: #E30613;  /* Vermelho Direcional */
+            --dark: #0a0a0a;
+            --light: #f1f4f8;
+            --white: #ffffff;
+            --success: #25d366;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
+        html { scroll-behavior: smooth; }
+        body { background-color: var(--white); color: var(--dark); overflow-x: hidden; }
+        .container { max-width: 1200px; margin: auto; padding: 0 25px; }
+
+        /* --- PRELOADER SUPER SOFISTICADO COM NOME PISCANDO --- */
+        #preloader {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: var(--primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+        .loader-content { text-align: center; color: var(--white); width: 300px; }
+        .loader-content h1 { 
+            font-size: 2rem; 
+            letter-spacing: 5px; 
+            font-weight: 800; 
+            margin-bottom: 10px; 
+            text-transform: uppercase;
+            animation: pulse-name 2.2s infinite; /* Nome Piscando Sofisticado */
+        }
+        .loader-content p { font-size: 1.1rem; opacity: 0.8; font-weight: 300; }
+        
+        .progress-container {
+            width: 100%;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            margin-top: 25px;
+            overflow: hidden;
+            position: relative;
+        }
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background: var(--white);
+            box-shadow: 0 0 10px rgba(255,255,255,0.7);
+            animation: load 2.8s cubic-bezier(0.645, 0.045, 0.355, 1) forwards;
+        }
+
+        @keyframes load { 0% { width: 0%; } 100% { width: 100%; } }
+        @keyframes pulse-name { 
+            0%, 100% { opacity: 1; transform: scale(1); } 
+            50% { opacity: 0.4; transform: scale(0.98); } 
+        }
+
+        /* --- HEADER DIREÇÃO DIRECIONAL --- */
+        header { background: var(--white); padding: 15px 0; position: sticky; top: 0; z-index: 900; box-shadow: 0 2px 15px rgba(0,0,0,0.05); }
+        header .container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { height: 40px; }
+        .btn-top-whats { background: var(--primary); color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: 700; font-size: 0.9rem; transition: 0.3s; }
+        .btn-top-whats:hover { background: var(--accent); }
+
+        /* --- HERO --- */
+        .hero { 
+            padding: 120px 0; 
+            background: linear-gradient(rgba(0,51,153,0.85), rgba(0,51,153,0.9)), url('Design-sem-nome-20-1-300x300.png') center/cover no-repeat;
+            color: var(--white); text-align: center;
+        }
+        .hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.1; margin-bottom: 25px; font-weight: 800; }
+        .hero p { font-size: 1.3rem; margin-bottom: 35px; opacity: 0.9; max-width: 800px; margin-inline: auto; font-weight: 300; }
+        .btn-hero { background: var(--accent); color: white; padding: 18px 45px; border-radius: 50px; text-decoration: none; font-weight: 800; transition: 0.3s; display: inline-block; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+        .btn-hero:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(0,0,0,0.25); }
+
+        /* --- ABA DE DÚVIDAS / DOCUMENTAÇÃO --- */
+        #duvidas { padding: 100px 0; background: var(--light); }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header h2 { font-size: 2.5rem; color: var(--primary); font-weight: 800; }
+        .section-header p { font-size: 1.2rem; color: #555; }
+        
+        .docs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .doc-card { background: var(--white); padding: 40px 30px; border-radius: 20px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.02); transition: 0.3s; }
+        .doc-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .doc-card i { font-size: 2.8rem; color: var(--accent); margin-bottom: 20px; }
+        .doc-card h3 { color: var(--primary); font-size: 1.4rem; margin-bottom: 12px; }
+        .doc-card p { font-size: 1rem; color: #666; line-height: 1.6; }
+
+        /* --- GALERIA PREMIUM DE IMÓVEIS --- */
+        .galeria { padding: 100px 0; }
+        .grid-imoveis { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px; }
+        .imovel-card { position: relative; border-radius: 20px; overflow: hidden; height: 380px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
+        .imovel-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .imovel-card:hover img { transform: scale(1.08); }
+        .imovel-overlay { position: absolute; bottom: 0; left: 0; width: 100%; padding: 30px; background: linear-gradient(transparent, rgba(0,0,0,0.9)); color: white; }
+        .imovel-overlay h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 5px; }
+
+        /* --- VIDEO INSTITUCIONAL --- */
+        .video-section { padding: 100px 0; background: var(--primary); text-align: center; color: white; }
+        .video-box { max-width: 900px; margin: 40px auto; border-radius: 25px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.3); border: 10px solid rgba(255,255,255,0.1); }
+        video { width: 100%; height: auto; display: block; }
+
+        /* --- WHATSAPP FIXO --- */
+        .whats-fixo { position: fixed; bottom: 30px; right: 30px; background: var(--success); color: white; width: 65px; height: 65px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); z-index: 1000; transition: 0.3s; }
+        .whats-fixo:hover { transform: scale(1.1) rotate(10deg); }
+
+        footer { background: var(--dark); color: white; padding: 70px 0; text-align: center; }
+        .footer-line { width: 50px; height: 3px; background: var(--accent); margin: 25px auto; }
+        
+        /* Reveal Animation on Scroll */
+        .reveal { opacity: 0; transform: translateY(30px); transition: 1s all ease; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+
+    <div id="preloader">
+        <div class="loader-content">
+            <h1>VICTOR HUGO</h1>
+            <p>CONSULTORIA PREMIUM</p>
+            <div class="progress-container">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <div class="container">
+            <img src="download.png" alt="Logo Direcional" class="logo">
+            <a href="https://wa.me/5561982405573" class="btn-top-whats" target="_blank">FALAR COM VICTOR</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1 class="reveal">O imóvel dos seus sonhos,<br>com a chave na mão.</h1>
+            <p class="reveal">Consultoria estratégica com Victor Hugo. Realize o sonho da casa própria em Santa Maria e região com quem entende do assunto.</p>
+            <a href="#duvidas" class="btn-hero reveal">COMEÇAR MINHA CONQUISTA</a>
+        </div>
+    </section>
+
+    <section id="duvidas">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>O que preciso para fechar?</h2>
+                <p>Prepare estes documentos para agilizar sua aprovação:</p>
+            </div>
+            <div class="docs-grid">
+                <div class="doc-card reveal">
+                    <i class="fas fa-id-card"></i>
+                    <h3>Identificação</h3>
+                    <p>RG, CPF ou CNH e certidão de estado civil.</p>
+                </div>
+                <div class="doc-card reveal">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                    <h3>Comprovação de Renda</h3>
+                    <p>3 últimos holerites ou extratos bancários consolidados.</p>
+                </div>
+                <div class="doc-card reveal">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <h3>Residência</h3>
+                    <p>Conta de água ou luz atualizada (últimos 60 dias).</p>
+                </div>
+                <div class="doc-card reveal">
+                    <i class="fas fa-piggy-bank"></i>
+                    <h3>FGTS</h3>
+                    <p>Extrato atualizado para reduzir o valor das parcelas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="galeria container">
+        <div class="section-header reveal">
+            <h2 style="color: var(--primary);">Nossos Projetos</h2>
+        </div>
+        <div class="grid-imoveis">
+            <div class="imovel-card reveal">
+                <img src="01-TotalVille-Conviver-GUIA-PDF-Interativo-Capas-1080x1560px-208x300.jpg" alt="Total Ville">
+                <div class="imovel-overlay"><h3>Total Ville</h3></div>
+            </div>
+            <div class="imovel-card reveal">
+                <img src="Design-sem-nome-20-1-300x300.png" alt="Fachada Lazer">
+                <div class="imovel-overlay"><h3>Lazer Completo</h3></div>
+            </div>
+            <div class="imovel-card reveal">
+                <img src="Direcional_BR__Capa__-_Voce_sonha_com_um_ape_-_Liveprint_1-300x300.webp" alt="Decorado">
+                <div class="imovel-overlay"><h3>Plantas Modernas</h3></div>
+            </div>
+            <div class="imovel-card reveal">
+                <img src="rede-social-12752-feed-1775012770.jpg" alt="Fachada Dia">
+                <div class="imovel-overlay"><h3>Segurança 24h</h3></div>
+            </div>
+            <div class="imovel-card reveal">
+                <img src="rede-social-12754-feed-1775012766.jpg" alt="Piscina Clube">
+                <div class="imovel-overlay"><h3>Piscina e Esporte</h3></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="video-section">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2 style="color: white;">Experiência Direcional</h2>
+            </div>
+            <div class="video-box reveal">
+                <video controls playsinline poster="download.png">
+                    <source src="Direcional-DF-Facebook-E-Direcional-e-sensacional-Enxoval-Corretor-Tipologia-2.mp4" type="video/mp4">
+                    Seu navegador não suporta vídeos.
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <h2 style="font-weight: 800; letter-spacing: 2px;">VICTOR HUGO</h2>
+            <p>Consultor de Imóveis Credenciado</p>
+            <div class="footer-line"></div>
+            <p style="opacity: 0.5; font-size: 0.8rem; margin-top: 10px;">© 2026 Santa Maria, Brasília - DF. Atendimento personalizado.</p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/5561982405573" class="whats-fixo" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Preloader Logic
+        window.addEventListener("load", function() {
+            setTimeout(() => {
+                const preloader = document.getElementById("preloader");
+                preloader.style.opacity = "0";
+                setTimeout(() => {
+                    preloader.style.display = "none";
+                }, 800);
+            }, 3000); // 3 seconds load time for the blinking effect
+        });
+
+        // Reveal Animation on Scroll
+        window.addEventListener('scroll', reveal);
+        function reveal() {
+            var reveals = document.querySelectorAll('.reveal');
+            for (var i = 0; i < reveals.length; i++) {
+                var windowheight = window.innerHeight;
+                var revealtop = reveals[i].getBoundingClientRect().top;
+                var revealpoint = 150;
+                if (revealtop < windowheight - revealpoint) {
+                    reveals[i].classList.add('active');
+                }
+            }
+        }
+        // Run once on load to show elements already in view
+        reveal();
+    </script>
+
+</body>
+</html>
+<script>// Escreva seu JS aqui</script>
+</body>
+</html>
